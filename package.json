@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "assert-plus": "*",
+    "axios": "^0.19.2",
     "body-parser": "^1.15.2",
     "bunyan": "*",
     "cookie-parser": "^1.4.3",

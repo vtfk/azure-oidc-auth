@@ -7,6 +7,7 @@ const passport = require('passport')
 const bunyan = require('bunyan')
 const config = require('./config')
 const path = require('path')
+const getGraphUser = require('./lib/get-graph-user')
 
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 
@@ -63,14 +64,17 @@ function (iss, sub, profile, accessToken, refreshToken, done) {
     return done(new Error('No oid found'), null)
   }
   // asynchronous verification, for effect...
-  process.nextTick(function () {
+  process.nextTick(async function () {
+    // Get additional user info
+    const { onPremisesSamAccountName } = await getGraphUser(accessToken)
+
     findByOid(profile.oid, function (err, user) {
       if (err) {
         return done(err)
       }
       if (!user) {
         // "Auto-registration"
-        users.push(profile)
+        users.push({ ...profile, onPremisesSamAccountName })
         return done(null, profile)
       }
       return done(null, user)
