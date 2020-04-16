@@ -20,7 +20,7 @@ app.use(app.router)
 
 app.get('/login', (req, res) => {
   const { origin } = req.query
-  if(!origin) {
+  if (!origin) {
     return res.status(400).send('No origin param set')
   }
 
@@ -34,10 +34,10 @@ app.get('/login', (req, res) => {
 app.post('/callback',
   (req, res, next) => {
     azurePassport.authenticate('azuread-openidconnect', { response: res, failureRedirect: '/' })(req, res, next)
-  }, 
+  },
   (req, res) => {
     const { origin } = req.session
-    
+
     logger('info', ['callback', 'origin', origin, 'user', req.user])
 
     const jwt = generateJwt(req.user)
@@ -48,7 +48,7 @@ app.post('/callback',
 app.get('/logout', (req, res) => {
   logger('info', ['logout'])
 
-  req.session.destroy((err) => {
+  req.session.destroy(() => {
     req.logOut()
     res.redirect(config.destroySessionUrl)
   })

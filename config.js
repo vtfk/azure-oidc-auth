@@ -3,7 +3,7 @@ require('dotenv').config()
 module.exports = {
   creds: {
     // Required
-    identityMetadata: `https://login.microsoftonline.com/${process.env.TENANT_NAME}.onmicrosoft.com/v2.0/.well-known/openid-configuration`, 
+    identityMetadata: `https://login.microsoftonline.com/${process.env.TENANT_NAME}.onmicrosoft.com/v2.0/.well-known/openid-configuration`,
     // or equivalently: 'https://login.microsoftonline.com/<tenant_guid>/v2.0/.well-known/openid-configuration'
     //
     // or you can use the common endpoint
@@ -81,7 +81,7 @@ module.exports = {
   },
 
   cookieSecret: process.env.COOKIE_SECRET || 'Heisann og hoppsann og fallerallera',
-  
+
   // The url you need to go to destroy the session with AAD
   destroySessionUrl: 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
 
