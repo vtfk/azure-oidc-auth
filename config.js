@@ -83,7 +83,7 @@ module.exports = {
   cookieSecret: process.env.COOKIE_SECRET || 'Heisann og hoppsann og fallerallera',
 
   // The url you need to go to destroy the session with AAD
-  destroySessionUrl: process.env.DESTROY_SESSION_URL || 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=https://vtfk.no',
+  destroySessionUrl: `https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=${process.env.POST_LOGOUT_REDIRECT_URL || 'https://vtfk.no'}`,
 
   PAPERTRAIL_HOSTNAME: process.env.PAPERTRAIL_HOSTNAME || 'azure-oidc-auth',
   PAPERTRAIL_HOST: process.env.PAPERTRAIL_HOST || 'logs.papertrailapp.com',
