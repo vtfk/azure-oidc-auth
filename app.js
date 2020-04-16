@@ -10,13 +10,15 @@ const generateJwt = require('./lib/generate-jwt')
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
-
 app.use(cookieParser())
 app.use(expressSession({ secret: config.cookieSecret, resave: true, saveUninitialized: false }))
 
 app.use(azurePassport.initialize())
 app.use(azurePassport.session())
-app.use(app.router)
+
+app.get('/', (req, res) => {
+  res.send('Hello lovely human! Move along, nothing to see here... :)')
+})
 
 app.get('/login', (req, res) => {
   const { origin } = req.query
