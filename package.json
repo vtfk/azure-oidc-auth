@@ -25,7 +25,7 @@
     "passport": "^0.4.1",
     "passport-azure-ad": "^4.2.1",
     "simple-encryptor": "^4.0.0",
-    "winston": "3.2.1",
+    "winston": "3.3.0",
     "winston-papertrail": "1.0.5"
   },
   "devDependencies": {
