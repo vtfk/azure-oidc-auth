@@ -43,7 +43,7 @@ app.post('/callback',
   (req, res) => {
     const { origin, params } = req.session
 
-    logger('info', ['callback', 'origin', origin, 'user', req.user])
+    logger('info', ['callback', 'origin', origin, 'user', JSON.stringify(req.user)])
 
     const jwt = generateJwt(req.user)
     const queries = queryString.stringify({ jwt, ...params })
