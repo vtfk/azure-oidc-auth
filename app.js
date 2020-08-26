@@ -2,6 +2,8 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const bodyParser = require('body-parser')
+const queryString = require('query-string')
+
 const azurePassport = require('./lib/azure-passport')
 const config = require('./config')
 const logger = require('./lib/logger')
@@ -21,13 +23,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  const { origin } = req.query
+  const { origin, ...params } = req.query
   if (!origin) {
     return res.status(400).send('No origin param set')
   }
 
   logger('info', ['login', 'origin', origin])
   req.session.origin = origin
+  req.session.params = params || null
 
   // Let passport do the rest...
   azurePassport.authenticate('azuread-openidconnect', { response: res, failureRedirect: '/' })(req, res)
@@ -38,12 +41,14 @@ app.post('/callback',
     azurePassport.authenticate('azuread-openidconnect', { response: res, failureRedirect: '/' })(req, res, next)
   },
   (req, res) => {
-    const { origin } = req.session
+    const { origin, ...params } = req.session
 
     logger('info', ['callback', 'origin', origin, 'user', req.user])
 
     const jwt = generateJwt(req.user)
-    res.redirect(`${origin}?jwt=${jwt}`)
+    const queries = queryString.stringify({ jwt, ...params })
+
+    res.redirect(`${origin}?${queries}`)
   }
 )
 
