@@ -25,11 +25,12 @@ POST_LOGOUT_REDIRECT_URL=<url to redirect to after logout>
 
 ## API
 
-### GET ```/login?origin=<url for redirect>```
+### GET ```/login?origin=<url for redirect>&other=parameter```
 
 - sends the user to azure login
-- successful login redirects to ```origin?jwt=<jwt>```
+- successful login redirects to ```origin?jwt=<jwt>&other=parameter```
 - jwt:
+
 ```js
 {
   userName: 'Ola Nordmann',
@@ -37,7 +38,6 @@ POST_LOGOUT_REDIRECT_URL=<url to redirect to after logout>
   email: 'ola.nordmann@vtfk.no'
 }
 ```
-
 
 ### GET ```/logout```
 
@@ -47,7 +47,6 @@ POST_LOGOUT_REDIRECT_URL=<url to redirect to after logout>
 ### POST ```/callback```
 
 - successful auth redirects to ```origin?jwt=<jwt>```
-
 
 ## License
 
