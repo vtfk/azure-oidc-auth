@@ -24,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.4.1",
     "passport-azure-ad": "^4.2.1",
+    "query-string": "6.13.1",
     "simple-encryptor": "^4.0.0",
     "winston": "3.3.3",
     "winston-papertrail": "1.0.5"
