@@ -41,7 +41,7 @@ app.post('/callback',
     azurePassport.authenticate('azuread-openidconnect', { response: res, failureRedirect: '/' })(req, res, next)
   },
   (req, res) => {
-    const { origin, ...params } = req.session
+    const { origin, params } = req.session
 
     logger('info', ['callback', 'origin', origin, 'user', req.user])
 
