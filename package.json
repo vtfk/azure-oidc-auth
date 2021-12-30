@@ -30,6 +30,6 @@
     "winston-papertrail": "1.0.5"
   },
   "devDependencies": {
-    "standard": "16.0.3"
+    "standard": "16.0.4"
   }
 }
